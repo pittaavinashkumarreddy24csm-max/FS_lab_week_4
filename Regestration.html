@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            padding: 30px 10px;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 25px 35px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 420px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .radio-group label {
+            font-weight: normal;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .msg {
+            font-size: 12px;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .msg.success {
+            color: #2e7d32;
+        }
+
+        .msg.error {
+            color: #d32f2f;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .btn-submit:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Student Registration Form</h2>
+
+    <form id="regForm" onsubmit="return validateAll(event)">
+        <!-- First Name -->
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" value="Avinash" oninput="validateFirstName()">
+            <span id="firstNameMsg" class="msg"></span>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" value="Kumar" oninput="validateLastName()">
+            <span id="lastNameMsg" class="msg"></span>
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input type="text" id="dob" placeholder="DD-MM-YYYY" value="15-08-2001" oninput="validateDOB()">
+            <span id="dobMsg" class="msg"></span>
+        </div>
+
+        <!-- Email ID -->
+        <div class="form-group">
+            <label for="email">Email Id:</label>
+            <input type="text" id="email" value="avinash@gmail.com" oninput="validateEmail()">
+            <span id="emailMsg" class="msg"></span>
+        </div>
+
+        <!-- Mobile No. -->
+        <div class="form-group">
+            <label for="mobile">Mobile No.:</label>
+            <input type="text" id="mobile" value="9876543210" oninput="validateMobile()">
+            <span id="mobileMsg" class="msg"></span>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+            <label>Gender:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="gender" value="Male" onchange="validateGender()"> Male</label>
+                <label><input type="radio" name="gender" value="Female" onchange="validateGender()"> Female</label>
+            </div>
+            <span id="genderMsg" class="msg"></span>
+        </div>
+
+        <!-- Country -->
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <select id="country" onchange="validateCountry()">
+                <option value="">Select Country</option>
+                <option value="India" selected>India</option>
+                <option value="USA">USA</option>
+                <option value="UK">UK</option>
+            </select>
+            <span id="countryMsg" class="msg"></span>
+        </div>
+
+        <!-- State -->
+        <div class="form-group">
+            <label for="state">State:</label>
+            <select id="state" onchange="validateState()">
+                <option value="">Select State</option>
+                <option value="Andhra Pradesh" selected>Andhra Pradesh</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Maharashtra">Maharashtra</option>
+            </select>
+            <span id="stateMsg" class="msg"></span>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" id="address" value="Visakhapatnam , Andhra Pradesh" oninput="validateAddress()">
+            <span id="addressMsg" class="msg"></span>
+        </div>
+
+        <!-- Pin Code -->
+        <div class="form-group">
+            <label for="pincode">Pin Code:</label>
+            <input type="text" id="pincode" value="535216" oninput="validatePinCode()">
+            <span id="pincodeMsg" class="msg"></span>
+        </div>
+
+        <!-- City -->
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" value="Visakhapatnam" oninput="validateCity()">
+            <span id="cityMsg" class="msg"></span>
+        </div>
+
+        <!-- District -->
+        <div class="form-group">
+            <label for="district">District:</label>
+            <select id="district" onchange="validateDistrict()">
+                <option value="">Select District</option>
+                <option value="Visakhapatnam" selected>Visakhapatnam</option>
+                <option value="Vizianagram">Vizianagaram</option>
+                <option value="Srikakulam">Srikakulam</option>
+            </select>
+            <span id="districtMsg" class="msg"></span>
+        </div>
+
+        <!-- Hobbies -->
+        <div class="form-group">
+            <label for="hobbies">Hobbies:</label>
+            <textarea id="hobbies" rows="2" oninput="validateHobbies()">Reading, Coding</textarea>
+            <span id="hobbiesMsg" class="msg"></span>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    function setMsg(id, text, isSuccess) {
+        const el = document.getElementById(id);
+        el.innerText = text;
+        el.className = 'msg ' + (isSuccess ? 'success' : 'error');
+    }
+
+    function validateFirstName() {
+        const val = document.getElementById('firstName').value.trim();
+        if (val.length >= 2) {
+            setMsg('firstNameMsg', '✓ Looks good!', true);
+            return true;
+        } else {
+            setMsg('firstNameMsg', 'Please enter a valid first name!', false);
+            return false;
+        }
+    }
+
+    function validateLastName() {
+        const val = document.getElementById('lastName').value.trim();
+        if (val.length >= 1) {
+            setMsg('lastNameMsg', '✓ Looks good!', true);
+            return true;
+        } else {
+            setMsg('lastNameMsg', 'Please enter a valid last name!', false);
+            return false;
+        }
+    }
+
+    function validateDOB() {
+        const val = document.getElementById('dob').value.trim();
+        const dateRegex = /^\d{2}-\d{2}-\d{4}$/;
+        if (dateRegex.test(val)) {
+            setMsg('dobMsg', '✓ Valid date!', true);
+            return true;
+        } else {
+            setMsg('dobMsg', 'Please enter date in DD-MM-YYYY format!', false);
+            return false;
+        }
+    }
+
+    function validateEmail() {
+        const val = document.getElementById('email').value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailRegex.test(val)) {
+            setMsg('emailMsg', '✓ Valid email address!', true);
+            return true;
+        } else {
+            setMsg('emailMsg', 'Please enter a valid email address!', false);
+            return false;
+        }
+    }
+
+    function validateMobile() {
+        const val = document.getElementById('mobile').value.trim();
+        const mobileRegex = /^[0-9]{10}$/;
+        if (mobileRegex.test(val)) {
+            setMsg('mobileMsg', '✓ Valid 10 digit mobile number!', true);
+            return true;
+        } else {
+            setMsg('mobileMsg', 'Please enter 10 digit mobile number!', false);
+            return false;
+        }
+    }
+
+    function validateGender() {
+        const radios = document.getElementsByName('gender');
+        let selected = false;
+        for (let r of radios) {
+            if (r.checked) selected = true;
+        }
+        if (selected) {
+            setMsg('genderMsg', '✓ Gender selected', true);
+            return true;
+        } else {
+            setMsg('genderMsg', 'Please select your gender!', false);
+            return false;
+        }
+    }
+
+    function validateCountry() {
+        const val = document.getElementById('country').value;
+        if (val !== "") {
+            setMsg('countryMsg', '✓ Country selected', true);
+            return true;
+        } else {
+            setMsg('countryMsg', 'Please select a country!', false);
+            return false;
+        }
+    }
+
+    function validateState() {
+        const val = document.getElementById('state').value;
+        if (val !== "") {
+            setMsg('stateMsg', '✓ State selected', true);
+            return true;
+        } else {
+            setMsg('stateMsg', 'Please select a state!', false);
+            return false;
+        }
+    }
+
+    function validateAddress() {
+        const val = document.getElementById('address').value.trim();
+        if (val.length >= 5) {
+            setMsg('addressMsg', '✓ Looks good!', true);
+            return true;
+        } else {
+            setMsg('addressMsg', 'Please enter a valid address!', false);
+            return false;
+        }
+    }
+
+    function validatePinCode() {
+        const val = document.getElementById('pincode').value.trim();
+        const pinRegex = /^[0-9]{6}$/;
+        if (pinRegex.test(val)) {
+            setMsg('pincodeMsg', '✓ Valid 6 digit pin code!', true);
+            return true;
+        } else {
+            setMsg('pincodeMsg', 'Please enter a 6 digit pin code!', false);
+            return false;
+        }
+    }
+
+    function validateCity() {
+        const val = document.getElementById('city').value.trim();
+        if (val.length >= 2) {
+            setMsg('cityMsg', '✓ Looks good!', true);
+            return true;
+        } else {
+            setMsg('cityMsg', 'Please enter a valid city name!', false);
+            return false;
+        }
+    }
+
+    function validateDistrict() {
+        const val = document.getElementById('district').value;
+        if (val !== "") {
+            setMsg('districtMsg', '✓ District selected', true);
+            return true;
+        } else {
+            setMsg('districtMsg', 'Please select a district!', false);
+            return false;
+        }
+    }
+
+    function validateHobbies() {
+        const val = document.getElementById('hobbies').value.trim();
+        if (val.length >= 10) {
+            setMsg('hobbiesMsg', `✓ Looks good! (You entered ${val.length})`, true);
+            return true;
+        } else {
+            setMsg('hobbiesMsg', `Please enter at least 10 characters! (You entered ${val.length})`, false);
+            return false;
+        }
+    }
+
+    function validateAll(e) {
+        e.preventDefault();
+        const valid = validateFirstName() & validateLastName() & validateDOB() &
+                      validateEmail() & validateMobile() & validateGender() &
+                      validateCountry() & validateState() & validateAddress() &
+                      validatePinCode() & validateCity() & validateDistrict() & validateHobbies();
+
+        if (valid) {
+            alert("Form submitted successfully!");
+        } else {
+            alert("Please fix the validation errors in the form.");
+        }
+        return false;
+    }
+
+    // Trigger initial validations on load to mirror reference image values
+    window.onload = function() {
+        validateFirstName();
+        validateLastName();
+        validateDOB();
+        validateEmail();
+        validateMobile();
+        validateGender();
+        validateCountry();
+        validateState();
+        validateAddress();
+        validatePinCode();
+        validateCity();
+        validateDistrict();
+        validateHobbies();
+    };
+</script>
+
+</body>
+</html>
