@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Name Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="card">
+    <h1>Student Name Manager</h1>
+
+    <!-- Input and Add Button Section -->
+    <div class="input-group">
+      <input type="text" id="studentInput" placeholder="Enter student name">
+      <button id="addBtn">Add Student</button>
+    </div>
+
+    <!-- Total Count -->
+    <div class="counter">
+      <strong>Total Students: <span id="studentCount">0</span></strong>
+    </div>
+
+    <!-- Student List Container -->
+    <ul id="studentList" class="student-list"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
